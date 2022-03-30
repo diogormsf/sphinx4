@@ -14,6 +14,7 @@ package edu.cmu.sphinx.api;
 import java.io.IOException;
 
 import edu.cmu.sphinx.frontend.util.StreamDataSource;
+import edu.cmu.sphinx.recognizer.Recognizer;
 
 
 /**
@@ -66,10 +67,34 @@ public class LiveSpeechRecognizer extends AbstractSpeechRecognizer {
      *
      * Closes the Microphone Connection and Data Line is made available for other applications.
      */
-
     public void closeRecognizer(){
         microphone.stopRecording();
         recognizer.deallocate();
         microphone.closeConnection();
     }
+
+    /**
+     * Returns the current context to change the grammar in real time
+     * NOT INITIALLY IMPLEMENTED BY THE LIBRARY
+     * @return { Context } the current context of the recognizer
+     */
+    public Context getContext() {
+        return this.context;
+    }
+
+    /**
+     * Returns the current microphone to force close the recognizer
+     * NOT INITIALLY IMPLEMENTED BY THE LIBRARY
+     * @return { Microphone } the current microphone
+     */
+    public Microphone getMicrophone() {
+        return this.microphone;
+    }
+
+    /**
+     * Returns the current recognizer instance to change the state of the recognizer
+     * NOT INITIALLY IMPLEMENTED BY THE LIBRARY
+     * @return { Recognizer } the current recognizer instance
+     */
+    public Recognizer getRecognizer() { return this.recognizer; }
 }

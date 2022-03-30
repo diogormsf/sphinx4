@@ -14,12 +14,17 @@ package edu.cmu.sphinx.api;
 import static edu.cmu.sphinx.util.props.ConfigurationManagerUtils.resourceToURL;
 import static edu.cmu.sphinx.util.props.ConfigurationManagerUtils.setProperty;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 import edu.cmu.sphinx.frontend.frequencywarp.MelFrequencyFilterBank2;
 import edu.cmu.sphinx.frontend.util.StreamDataSource;
+import edu.cmu.sphinx.jsgf.JSGFGrammar;
+import edu.cmu.sphinx.jsgf.JSGFGrammarException;
+import edu.cmu.sphinx.jsgf.JSGFGrammarParseException;
 import edu.cmu.sphinx.linguist.acoustic.tiedstate.Loader;
 import edu.cmu.sphinx.util.TimeFrame;
 import edu.cmu.sphinx.util.Utilities;
@@ -128,6 +133,20 @@ public class Context {
             setLocalProperty("flatLinguist->grammar", "jsgfGrammar");
         }
         setLocalProperty("decoder->searchManager", "simpleSearchManager");
+    }
+
+    /**
+     * Loads a new file for the current grammar
+     * @param baseUrl location of the grammar file
+     * @param name name of the grammar
+     * @throws JSGFGrammarParseException
+     * @throws IOException
+     * @throws JSGFGrammarException
+     */
+    public void loadJSGF(String baseUrl, String name) throws JSGFGrammarParseException, IOException, JSGFGrammarException {
+        URL file = new File(baseUrl).toURI().toURL();
+        getInstance(JSGFGrammar.class).setBaseURL(file);
+        getInstance(JSGFGrammar.class).loadJSGF(name);
     }
 
     /**
