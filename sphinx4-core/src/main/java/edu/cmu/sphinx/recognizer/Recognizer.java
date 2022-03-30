@@ -129,7 +129,7 @@ public class Recognizer implements Configurable, ResultProducer {
      * @param desiredState the state that the recognizer should be in
      * @throws IllegalStateException if the recognizer is not in the desired state.
      */
-    private void checkState(State desiredState) {
+    public void checkState(State desiredState) {
         if (currentState != desiredState) {
             throw new IllegalStateException("Expected state " + desiredState
                     + " actual state " + currentState);
@@ -142,7 +142,7 @@ public class Recognizer implements Configurable, ResultProducer {
      *
      * @param newState the new state
      */
-    private void setState(State newState) {
+    public void setState(State newState) {
         currentState = newState;
         synchronized (stateListeners) {
             for (StateListener sl : stateListeners) {

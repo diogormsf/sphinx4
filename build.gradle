@@ -15,7 +15,7 @@ allprojects() {
 subprojects() {
     apply plugin: 'java'
     apply plugin: 'maven'
-    
+
     uploadArchives {
         repositories {
             mavenDeployer {
@@ -28,9 +28,9 @@ subprojects() {
             }
         }
     }
-    
+
     repositories() {
-         mavenCentral()
+        mavenCentral()
     }
 
     compileJava.options.encoding = 'UTF-8'
@@ -42,7 +42,7 @@ subprojects() {
         classifier = 'javadoc'
         from javadoc
     }
-    
+
     task packageSources(type: Jar) {
         classifier = 'sources'
         from sourceSets.main.allSource
